@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Env
+.venv/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Checkpoints
+checkpoints/
+
+# Models
+models/
+
+# Logs
+logs/
+
+# Cache
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
