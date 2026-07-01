@@ -1,0 +1,20 @@
+from rich import print, inspect
+from rich.traceback import install
+from config import GPTConfig
+
+install()
+
+def main():
+
+    config = GPTConfig(
+        vocab_size=13,
+        
+    )
+
+    print(config)
+    print(config.embedding_dim)
+    print(config.num_heads)
+    print(config.learning_rate)
+
+if __name__ == "__main__":
+    main()
