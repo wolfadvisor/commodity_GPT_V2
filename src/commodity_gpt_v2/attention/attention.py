@@ -52,7 +52,7 @@ class SelfAttention(nn.Module):
         # project inputs to query, key, value
         q = self.query(x)   # (B, T, C)
         k = self.key(x)     # (B, T, C)
-        v = self.value(x)   # (B, T, C)
+        v = self.values(x)   # (B, T, C)
 
         # -----------------------------
         # Step 2
@@ -76,5 +76,5 @@ class SelfAttention(nn.Module):
         attn = F.softmax(scores, dim=-1)  # (B, T, T)
 
         out = torch.matmul(attn, v)  # (B, T, C)
-        
+
         return out
