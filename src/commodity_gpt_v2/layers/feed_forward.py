@@ -115,8 +115,8 @@ class FeedForward(nn.Module):
         # Helps reduce overfitting during training.
         # Automatically disabled during evaluation.
         # ----------------------------------------
-        self.dropout = nn.Dropout(
-            config.dropout
+        self.drop_out = nn.Dropout(
+            config.drop_out
         )
 
     def forward(
@@ -167,7 +167,7 @@ class FeedForward(nn.Module):
         x = self.fc2(x)
 
         # Regularization
-        x = self.dropout(x)
+        x = self.drop_out(x)
 
         return x
 

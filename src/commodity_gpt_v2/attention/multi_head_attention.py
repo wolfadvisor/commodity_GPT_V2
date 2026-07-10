@@ -15,7 +15,7 @@ class MultiHeadAttention(nn.Module):
 
         #Linear projections 
 
-        self.query == nn.Linear(
+        self.query = nn.Linear(
             self.embedding_dim,
             self.embedding_dim
         )
@@ -35,58 +35,58 @@ class MultiHeadAttention(nn.Module):
             self.embedding_dim
         )
 
-        def forward(self,x):
-            batch_size , seq_len, _ = x.shape
+    def forward(self,x):
+        batch_size , seq_len, _ = x.shape
 
-            #Projectiion to Q,K,V
+        #Projectiion to Q,K,V
 
-            Q = self.query(x)
-            K = self.key(x)
-            V = self.value(x)
+        Q = self.query(x)
+        K = self.key(x)
+        V = self.value(x)
 
-            #split into heads
+        #split into heads
 
-            Q = Q.view(
-                batch_size,
-                seq_len,
-                self.num_heads,
-                self.head_dim
-            )
+        Q = Q.view(
+            batch_size,
+            seq_len,
+            self.num_heads,
+            self.head_dim
+        )
 
-            K = K.view(
-                batch_size,
-                seq_len,
-                self.num_heads,
-                self.head_dim
-            )
+        K = K.view(
+            batch_size,
+            seq_len,
+            self.num_heads,
+            self.head_dim
+        )
 
-            V = V.view(
-                batch_size,
-                seq_len,
-                self.num_heads,
-                self.head_dim
-            )
+        V = V.view(
+            batch_size,
+            seq_len,
+            self.num_heads,
+            self.head_dim
+        )
 
-            #Move heads before sequence, tranpose the matrix value
+        #Move heads before sequence, tranpose the matrix value
 
-            Q = Q.transpose(1,2)
-            K = K.transpose(1,2)
-            V = V.transpose(1,2)
+        Q = Q.transpose(1,2)
+        K = K.transpose(1,2)
+        V = V.transpose(1,2)
 
-            # (Attention computation will be added next), to not lose integrity
+        # (Attention computation will be added next), to not lose integrity
 
-            #temporary output
+        #temporary output
 
-            out = V
+        out = V
 
-            #Restore dimensions
+        #Restore dimensions
 
-            out = out.transpose(1,2)
+        out = out.transpose(1,2)
 
-            out = out.contigious().view(
-                batch_size,
-                seq_len,
-                self.embedding_dim
-            )
+        out = out.contiguous().view(
+            batch_size,
+            seq_len,
+            self.embedding_dim
+        )
 
-            return self.output(out)
+        return self.output(out)
