@@ -9,7 +9,7 @@ from commodity_gpt_v2.layers.transformers_stack import TransformerStack
 
 config = GPTConfig(
     vocab_size=100,
-    num_layers=12
+    num_layers=4
 )
 
 stack = TransformerStack(config)
