@@ -50,23 +50,23 @@ class CommodityGPT(nn.Module):
 
         self.config = config
 
-        #Token Embeddings
+        # Token Embeddings
 
-        self.token_embeddings = TokenEmbedding(config)
+        self.token_embedding = TokenEmbedding(config)
 
-        #Position Embedding
+        # Position Embedding
 
         self.position_embedding = PositionalEmbedding(config)
 
-        #Trasnformer Stack
+        # Trasnformer Stack
 
         self.transformer = TransformerStack(config)
 
-        #Final LayerNorm
+        # Final LayerNorm
 
         self.final_norm = nn.LayerNorm(config.embedding_dim)
 
-        #Language Modeling Head
+        # Language Modeling Head
 
         self.lm_head = nn.Linear(
             config.embedding_dim,
@@ -79,7 +79,7 @@ class CommodityGPT(nn.Module):
             tokens: torch.Tensor,
         )-> torch.Tensor:
 
-        token_embeddings = self.token_embeddings(tokens)
+        token_embeddings = self.token_embedding(tokens)
 
         position_embeddings = self.position_embedding(tokens)
 

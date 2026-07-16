@@ -60,6 +60,7 @@ class SelfAttention(nn.Module):
         # -----------------------------
 
         scores = q @ k.transpose(-2,-1)
+        
 
          # -----------------------------
         # Step 3
