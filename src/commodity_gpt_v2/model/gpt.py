@@ -40,7 +40,7 @@ import torch.nn as nn
 
 from commodity_gpt_v2.config import GPTConfig
 from commodity_gpt_v2.embeddings.token_embedding import TokenEmbedding
-from commodity_gpt_v2.embeddings.positional_embedding import PositionalEmbbedding
+from commodity_gpt_v2.embeddings.positional_embedding import PositionalEmbedding
 from commodity_gpt_v2.layers.transformers_stack import TransformerStack
 
 class CommodityGPT(nn.Module):
@@ -56,7 +56,7 @@ class CommodityGPT(nn.Module):
 
         #Position Embedding
 
-        self.position_embedding = PositionalEmbbedding(config)
+        self.position_embedding = PositionalEmbedding(config)
 
         #Trasnformer Stack
 

@@ -29,9 +29,9 @@ class GPTConfig:
     # Model
     # ==========================
 
-    embedding_dim = 128
+    embedding_dim: int = 128
 
-    hidden_dim = 512
+    hidden_dim: int = 512
 
     num_heads : int = 4
 

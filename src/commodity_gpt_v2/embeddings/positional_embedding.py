@@ -3,35 +3,49 @@ import torch.nn as nn
 
 from commodity_gpt_v2.config import GPTConfig
 
-class PositionalEmbbedding(nn.Module):
-     """
-        Learnable positional embeddings.
 
-        Converts token positions into dense vectors.
-
-        Input:
-            seq_len
-
-        Output:
-            (1, seq_len, embedding_dim)
+class PositionalEmbedding(nn.Module):
     """
-     def __init__(self, config :GPTConfig):
-          super().__init__()
+    Learnable positional embeddings.
 
-          self.position_embedding = nn.Embedding(
-               num_embeddings= config.max_seq_length,
-               embedding_dim= config.embedding_dim
-          )
+    Converts token positions into dense vectors.
 
-     def forward(
-               self,
-               seq_len : int,
-               device : torch.device
-     )-> torch.Tensor:
-          
-          positions = torch.arange(
-               seq_len,
-               device=device
-          ).unsqueeze(0)
+    Input:
+        tokens -> (batch_size, sequence_length)
 
-          return self.position_embedding(positions)
+    Output:
+        (1, sequence_length, embedding_dim)
+    """
+
+    def __init__(self, config: GPTConfig):
+        super().__init__()
+
+        self.position_embedding = nn.Embedding(
+            num_embeddings=config.max_seq_length,
+            embedding_dim=config.embedding_dim
+        )
+
+    def forward(
+        self,
+        tokens: torch.Tensor
+    ) -> torch.Tensor:
+
+        # tokens shape:
+        # (batch_size, sequence_length)
+
+        seq_len = tokens.size(1)
+
+        positions = torch.arange(
+            seq_len,
+            device=tokens.device
+        )
+
+        # (sequence_length, embedding_dim)
+        pos_emb = self.position_embedding(
+            positions
+        )
+
+        # (1, sequence_length, embedding_dim)
+        pos_emb = pos_emb.unsqueeze(0)
+
+        return pos_emb
